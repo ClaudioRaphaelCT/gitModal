@@ -3,9 +3,9 @@
     <div class="modal-content">
       <slot></slot>
       <br />
-      <h3 class="text-center">{{ today }}</h3>
+      <h3 class="text-center">{{ title }}</h3>
       <v-divider class="mb-5"></v-divider>
-      <ul v-for="(item, indice) in lista" :key="indice">
+      <ul v-for="(item, indice) in filteredRapha" :key="indice">
         <li>
           <h4 class="mb-1 mt-1">
             {{ item.nome }}, {{ item.produto }}, R${{ item.valor }}
@@ -17,22 +17,18 @@
 </template>
 <script>
 import lista from "../bd/bd";
-import moment from "moment";
 export default {
   props: ["title"],
   data() {
     return {
       lista,
-      today: moment().format("MM/YYYY"),
     };
   },
   computed: {
-    novaData() {
-      const dataFull = new Date();
-      const year = dataFull.getFullYear();
-      const month = dataFull.getMonth;
-      const today = `${month}/${year}`;
-      return year;
+    filteredRapha() {
+      return this.lista.filter((e) => {
+        return e.nome == "Raphael";
+      });
     },
   },
 };
