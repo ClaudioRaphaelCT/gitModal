@@ -5,31 +5,24 @@
       <v-card-item>
         <div>
           <div class="text-h6 mb-1">Minha lista de compras</div>
-          <div class="text-caption">compras referentes a março</div>
+          <div class="text-caption">Compras referentes a Abril</div>
         </div>
       </v-card-item>
       <v-card-actions>
         <v-btn @click="showModal = true" color="error"> Visualizar </v-btn>
       </v-card-actions>
     </v-card>
-    <div class="modal" v-if="showModal">
-      <div class="modal-content">
-        <v-btn @click="showModal = false" color="error">X</v-btn>
-        <h3 class="text-center mb-5">Abril/2023</h3>
-        <v-divider class="mb-3"></v-divider>
-        <ul v-for="(item, indice) in lista" :key="indice">
-          <li class="text-center">
-            <h4>
-              {{ item.nome }}, {{ item.produto }}, valor: R$ {{ item.valor }}
-            </h4>
-          </li>
-        </ul>
+
+    <modal v-if="showModal" title="ABR/2023">
+      <div class="container">
+        <v-btn class="ma-2" color="error" @click="showModal = false">X</v-btn>
       </div>
-    </div>
+    </modal>
   </div>
 </template>
 <script>
 import lista from "./bd/bd";
+import modal from "./components/modal.vue";
 export default {
   data() {
     return {
@@ -37,28 +30,19 @@ export default {
       lista,
     };
   },
+  components: {
+    modal,
+  },
 };
 </script>
 <style>
-.modal {
-  position: fixed;
-  z-index: 1;
-  left: 0;
+.container {
+  position: relative;
+}
+
+.v-btn.ma-2 {
+  position: absolute;
   top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
-}
-
-.modal-content {
-  background-color: #fefefe;
-  margin: 15% auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-}
-
-li {
-  list-style: none;
+  right: 0;
 }
 </style>
